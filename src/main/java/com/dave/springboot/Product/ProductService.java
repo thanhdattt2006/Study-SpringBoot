@@ -12,62 +12,40 @@ public class ProductService {
 
     // all products
     public List<Product> getProducts() {
-        try {
-            return products;
-        } catch (Exception e) {
-            System.out.println("failed! error: " + e);
-        }
-        return List.of();
+        return products;
     }
 
     // get product by id
     public Product getProductById(int id) {
-        try {
-            return products.stream().filter(p -> p.getId() == id) // lọc product trùng id
-                    .findFirst() // tìm cái đầu tiên
-                    .orElse(new Product(100, "No item", 0)); // hong có return item rác
-        } catch (Exception e) {
-            System.out.println("failed! error: " + e);
-        }
-        return null;
+        return products.stream().filter(p -> p.getId() == id) // lọc product trùng id
+                .findFirst() // tìm cái đầu tiên
+                .orElse(new Product(100, "No item", 0)); // hong có return item rác
     }
 
     // add product
     public void addProduct(Product p) {
-        try {
-            products.add(p);
-        } catch (Exception e) {
-            System.out.println("failed! error: " + e);
-        }
+        products.add(p);
     }
 
     // update product
     public void updateProduct(Product p) {
-        try {
-            for (int i = 0; i < products.size(); i++) {
-                Product pro = products.get(i);
-                if (p.getId() == pro.getId()) { // Tìm ID trùng
-                    products.set(i, p); // Thay thế data cũ bằng data mới
-                    return;
-                }
+        for (int i = 0; i < products.size(); i++) {
+            Product pro = products.get(i);
+            if (p.getId() == pro.getId()) { // Tìm ID trùng
+                products.set(i, p); // Thay thế data cũ bằng data mới
+                return;
             }
-        } catch (Exception e) {
-            System.out.println("failed! error: " + e);
         }
     }
 
     // delete product
     public void deleteProduct(int id) {
-        try {
-            for (int i = 0; i < products.size(); i++) {
-                Product pro = products.get(i);
-                if (id == pro.getId()) {
-                    products.remove(i); // xoá khỏi list
-                    return;
-                }
+        for (int i = 0; i < products.size(); i++) {
+            Product pro = products.get(i);
+            if (id == pro.getId()) {
+                products.remove(i); // xoá khỏi list
+                return;
             }
-        } catch (Exception e) {
-            System.out.println("failed! error: " + e);
         }
     }
 }
