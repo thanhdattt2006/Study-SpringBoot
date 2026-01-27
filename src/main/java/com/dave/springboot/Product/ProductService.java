@@ -33,4 +33,26 @@ public class ProductService {
     public void addProduct(Product p) {
         products.add(p);
     }
+
+    // update product
+    public void updateProduct (Product p) {
+        for (int i = 0; i < products.size(); i++) {
+            Product pro = products.get(i);
+            if (p.getId() == pro.getId()) { // Tìm ID trùng
+                products.set(i, p); // Thay thế data cũ bằng data mới
+                return;
+            }
+        }
+    }
+
+    // delete product
+    public void deleteProduct (int id) {
+        for (int i = 0; i < products.size(); i++) {
+            Product pro = products.get(i);
+            if (id == pro.getId()) {
+                products.remove(i); // xoá khỏi list
+                return;
+            }
+        }
+    }
 }

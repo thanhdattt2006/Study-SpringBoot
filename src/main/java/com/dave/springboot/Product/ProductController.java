@@ -12,7 +12,6 @@ public class ProductController {
 
     @RequestMapping("/products")
     public List<Product> getProducts () {
-        System.out.println("abc");
         return service.getProducts();
     }
 
@@ -24,5 +23,15 @@ public class ProductController {
     @PostMapping("/products") // Dùng PostMapping cho hành động Thêm mới
     public void addProduct (@RequestBody Product p) {   // @RequestBody: Hứng cục JSON từ body request, ép kiểu sang Object Product
         service.addProduct(p);
+    }
+
+    @PutMapping("/products") // PutMapping cho update
+    public void updateProduct (@RequestBody Product p) {
+        service.updateProduct(p);
+    }
+
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct (@PathVariable int id) {
+        service.deleteProduct(id);
     }
 }
