@@ -9,4 +9,9 @@ public class HelloController {
     public String greet() {
         return "Hello Spring Boot";
     }
+    @RequestMapping("/study")
+    public String study () {
+        System.out.println("Telusko is here!");
+        return "Telusko doesn't teach, he educate";
+    }
 }
