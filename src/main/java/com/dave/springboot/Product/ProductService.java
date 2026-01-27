@@ -1,6 +1,7 @@
 package com.dave.springboot.Product;
 
 import org.springframework.stereotype.Service;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +15,14 @@ public class ProductService {
             new Product(5, "screen", 120.5)
     );
 
-    public List<Product> getProducts () {
+    public List<Product> getProducts() {
         return products;
+    }
+
+    public Product getProductById(int id) {
+        return products.stream()
+                .filter(p -> p.getId() == id) // lọc product trùng id
+                .findFirst() // tìm cái đầu tiên
+                .orElse(new Product(100, "No item", 0)); // hong có return item rác
     }
 }
