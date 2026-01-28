@@ -1,15 +1,21 @@
 package com.dave.springboot.Product;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity // Table trong DB
 public class Product {
-    private int id;
+    @Id
+    private int id; // Primary Key
+
     private String name;
     private double price;
 
-    Product() {
+    public Product() {
 
     }
 
-    Product(int id, String name, double price) {
+    public Product(int id, String name, double price) {
         this.id = id;
         this.name = name;
         this.price = price;

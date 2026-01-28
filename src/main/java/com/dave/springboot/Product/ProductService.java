@@ -1,5 +1,6 @@
 package com.dave.springboot.Product;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,44 +9,30 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    List<Product> products = new ArrayList<>(Arrays.asList(new Product(1, "laptop", 689.5), new Product(2, "cpu", 199.5), new Product(3, "gpu", 439.5), new Product(4, "phone", 249.5), new Product(5, "screen", 120.5)));
+    @Autowired
+    ProductRepo repo;
 
-    // all products
+    // Lấy hết: SELECT * FROM Product
     public List<Product> getProducts() {
-        return products;
+        return repo.findAll();
     }
 
-    // get product by id
+    // Lấy theo ID: SELECT * FROM Product WHERE id = ?
     public Product getProductById(int id) {
-        return products.stream().filter(p -> p.getId() == id) // lọc product trùng id
-                .findFirst() // tìm cái đầu tiên
-                .orElse(new Product(100, "No item", 0)); // hong có return item rác
+        return repo.findById(id).orElse(new Product());
     }
 
-    // add product
-    public void addProduct(Product p) {
-        products.add(p);
+    // Thêm hoặc Sửa: INSERT hoặc UPDATE
+    public void addProduct(Product prod) {
+        repo.save(prod); // Hàm save() cân cả thêm mới lẫn update
     }
 
-    // update product
-    public void updateProduct(Product p) {
-        for (int i = 0; i < products.size(); i++) {
-            Product pro = products.get(i);
-            if (p.getId() == pro.getId()) { // Tìm ID trùng
-                products.set(i, p); // Thay thế data cũ bằng data mới
-                return;
-            }
-        }
+    public void updateProduct(Product prod) {
+        repo.save(prod); // JPA thông minh: thấy có ID rồi thì nó tự Update
     }
 
-    // delete product
+    // Xóa: DELETE FROM Product WHERE id = ?
     public void deleteProduct(int id) {
-        for (int i = 0; i < products.size(); i++) {
-            Product pro = products.get(i);
-            if (id == pro.getId()) {
-                products.remove(i); // xoá khỏi list
-                return;
-            }
-        }
+        repo.deleteById(id);
     }
 }
