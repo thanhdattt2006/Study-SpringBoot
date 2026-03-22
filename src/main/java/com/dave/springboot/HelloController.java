@@ -17,8 +17,4 @@ public class HelloController {
         return "Telusko doesn't teach, he educate";
     }
 
-    @RequestMapping("/csrf-token")
-    public CsrfToken getCsrfToken (HttpServletRequest request) {
-        return (CsrfToken) request.getAttribute("_csrf");
-    }
 }
