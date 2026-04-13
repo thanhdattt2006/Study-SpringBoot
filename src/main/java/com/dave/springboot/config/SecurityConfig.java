@@ -2,10 +2,13 @@ package com.dave.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.Customizer;
 
@@ -33,5 +36,18 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build(); // Lắp ráp xong cái khiên, xuất xưởng!
+    }
+
+    @Bean
+    public AuthenticationProvider authProvider(MyUserDetailsService userDetailsService) {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+
+        // 1. Chỉ định cho thằng lính gác biết ai là người đi dò sổ Nam Tào (Database)
+        provider.setUserDetailsService(userDetailsService);
+
+        // 2. Bảo nó: "Mật khẩu tao lưu trong DB đang là chữ thô, đéo có mã hóa gì đâu, đọc thẳng đi!"
+        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+
+        return provider;
     }
 }

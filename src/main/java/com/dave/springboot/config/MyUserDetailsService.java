@@ -17,10 +17,13 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repo.findByUsername(username);
+
         if (user == null) {
-            System.out.println("User 404 cmnr");
+            System.out.println("Đéo thấy thằng này trong DB!");
             throw new UsernameNotFoundException("User not found");
         }
+
+        // Trả về một đối tượng bọc cái User lại (xem bước 5)
         return new UserPrincipal(user);
     }
 }
