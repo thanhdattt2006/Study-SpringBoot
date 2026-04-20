@@ -31,7 +31,6 @@ public class UserPrincipal implements UserDetails {
         return user.getUsername(); // Trả tên từ DB
     }
 
-    // Mấy cái dưới này mặc định Spring nó ép phải có, cứ quất true hết để khỏi bị khóa acc
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }

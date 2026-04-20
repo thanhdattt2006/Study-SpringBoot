@@ -1,5 +1,6 @@
 package com.dave.springboot.config;
 
+import com.dave.springboot.User.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -33,22 +35,36 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                        // MỞ CỬA CHO ĐĂNG KÝ (Ai cũng vào được)
-                        .requestMatchers("/api/auth/register").permitAll()
-                        // CÒN LẠI KHÓA HẾT (Phải login mới được xem)
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
-        // Nếu dùng JWT thì bỏ httpBasic đi, nhưng giờ cứ để test đã
-
-        return http.build();
-    }
-
-    @Bean
     public AuthenticationManager authManager (AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
+
+    @Autowired
+    private JwtFilter jwtFilter;
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(customizer -> customizer.disable())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                        .anyRequest().authenticated())
+                // Xóa bỏ httpBasic() nếu đã dùng JWT
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.csrf(customizer -> customizer.disable())
+//                .authorizeHttpRequests(request -> request
+//                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll() // Mở cửa 2 thằng này
+//                        .anyRequest().authenticated()) // Khóa hết mấy thằng khác
+//                .httpBasic(Customizer.withDefaults())
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // QUAN TRỌNG: Không dùng Session nữa
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // ĐÚNG THỨ TỰ NÀY
+//                .build();
+//    }
 }
