@@ -1,9 +1,9 @@
 package com.dave.springboot.User;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class UserService {
         if (authentication.isAuthenticated()) {
             return jwtService.generateToken(user.getUsername()); // Trả về chuỗi Token cho Client
         } else {
-            return "Thất bại rồi con trai!";
+            return "Failed! ";
         }
     }
 }
