@@ -1,11 +1,6 @@
-À, ra là muốn chuyên nghiệp kiểu "tây lông" để sau này còn đi lòe mấy ông HR đúng không? Tao hiểu ý mày rồi. Bỏ hết icon, đổi sang tiếng Anh, dùng văn phong kỹ thuật (technical terms) cho nó ra dáng Backend Engineer thực thụ.
+**This repository documents my professional transition from Java Core and Object-Oriented Programming (OOP) to Enterprise Web Development. The implementation follows the Spring Boot roadmap provided by Telusko, focusing on real-world application and industry standards.**
 
-Đây, bản README "thanh niên nghiêm túc" bằng tiếng Anh cho mày:
-
-Spring Boot Development Journey
-This repository documents my professional transition from Java Core and Object-Oriented Programming (OOP) to Enterprise Web Development. The implementation follows the Spring Boot roadmap provided by Telusko, focusing on real-world application and industry standards.
-
-Project Objectives
+**Project Objectives
 The primary objective is to master the Spring Boot ecosystem by building scalable, maintainable, and production-ready backend services. This project emphasizes clean architecture, security, and robust data management.
 
 Technical Stack
