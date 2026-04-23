@@ -1,28 +1,47 @@
-# Spring Boot Development Journey
+À, ra là muốn chuyên nghiệp kiểu "tây lông" để sau này còn đi lòe mấy ông HR đúng không? Tao hiểu ý mày rồi. Bỏ hết icon, đổi sang tiếng Anh, dùng văn phong kỹ thuật (technical terms) cho nó ra dáng Backend Engineer thực thụ.
 
-This repository is dedicated to my professional transition from Java Core and Object-Oriented Programming (OOP) to Enterprise Web Development. The project serves as a practical implementation of the Spring Boot roadmap provided by **Telusko**.
+Đây, bản README "thanh niên nghiêm túc" bằng tiếng Anh cho mày:
 
-## 🎯 Project Objectives
+Spring Boot Development Journey
+This repository documents my professional transition from Java Core and Object-Oriented Programming (OOP) to Enterprise Web Development. The implementation follows the Spring Boot roadmap provided by Telusko, focusing on real-world application and industry standards.
 
-The primary goal of this repository is to master the Spring Boot ecosystem while adhering to industry-standard development practices. It focuses on building scalable, maintainable, and production-ready backend services.
+Project Objectives
+The primary objective is to master the Spring Boot ecosystem by building scalable, maintainable, and production-ready backend services. This project emphasizes clean architecture, security, and robust data management.
 
-## 🛠 Technical Stack
+Technical Stack
+Language: Java 21+
 
-* **Language:** Java 21+
-* **Framework:** Spring Boot 
-* **Build Tool:** Maven
-* **Data Persistence:** Spring Data JPA / Hibernate
-* **Database:** PostgreSQL / H2
-* **Logging & Monitoring:** SLF4J & Logback
+Framework: Spring Boot
 
-## 🏗 Key Focus Areas
+Security: Spring Security & JSON Web Token (JWT)
 
-* **Inversion of Control (IoC) & DI:** Implementing clean Dependency Injection using Constructor Injection.
-* **Layered Architecture:** Organizing code into distinct Controller, Service, and Repository layers.
-* **Persistence Management:** Handling database transactions, entity relationships, and optimized querying.
-* **API Design:** Developing RESTful services with centralized error handling and data validation.
-* **Clean Code:** Eliminating raw types, avoiding hardcoded values, and ensuring type safety across the application.
+Build Tool: Maven
 
----
-**Learning Source:** Telusko (Spring Boot Series)  
-**Developer:** Dave (Thành Đạt)  
+Data Persistence: Spring Data JPA / Hibernate
+
+Database: MySQL
+
+Logging: SLF4J & Logback
+
+Key Focus Areas
+1. Inversion of Control (IoC) & Dependency Injection
+Implementing clean DI patterns using Constructor Injection to ensure code testability and loose coupling.
+
+2. Layered Architecture
+Organizing the codebase into distinct layers: Controller, Service, and Repository to maintain a clear separation of concerns.
+
+3. Authentication & Authorization
+Integrating Spring Security for robust access control. Implementing JWT (JSON Web Token) for stateless authentication to secure RESTful endpoints.
+
+4. Persistence Management
+Handling database transactions, complex entity relationships (One-to-Many, Many-to-Many), and query optimization using Spring Data JPA.
+
+5. RESTful API Design
+Developing standardized APIs with centralized error handling (@ControllerAdvice) and comprehensive data validation using Hibernate Validator.
+
+6. Clean Code Practices
+Adhering to SOLID principles, eliminating raw types, avoiding hardcoded values, and ensuring strict type safety across the application.
+
+Learning Source: Telusko (Spring Boot Series)
+
+Developer: Dave (Thanh Dat)
