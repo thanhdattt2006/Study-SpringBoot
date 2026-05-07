@@ -1,6 +1,7 @@
 package com.dave.springboot.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,8 @@ public class ProductController {
         }
     }
 
-    @PostMapping() // Dùng PostMapping cho hành động Thêm mới
+    @PostMapping()
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")// Dùng PostMapping cho hành động Thêm mới
     public void addProduct(@RequestBody Product p) {   // @RequestBody: Hứng cục JSON từ body request, ép kiểu sang Object Product
         try {
             service.addProduct(p);

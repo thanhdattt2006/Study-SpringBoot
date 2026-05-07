@@ -1,6 +1,7 @@
 package com.dave.springboot.config;
 
 import com.dave.springboot.User.User;
+import com.dave.springboot.User.UserPrincipal;
 import com.dave.springboot.User.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

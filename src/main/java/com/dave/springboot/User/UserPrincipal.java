@@ -1,6 +1,5 @@
-package com.dave.springboot.config;
+package com.dave.springboot.User;
 
-import com.dave.springboot.User.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +15,6 @@ public class UserPrincipal implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Mặc định ép mọi thằng thành quyền "USER" hết
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
-    }
-
-    @Override
     public String getPassword() {
         return user.getPassword(); // Trả pass từ DB
     }
@@ -31,8 +24,13 @@ public class UserPrincipal implements UserDetails {
         return user.getUsername(); // Trả tên từ DB
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Đọc cái 'role' của thằng user (ví dụ: "ROLE_ADMIN") và gắn vào thẻ căn cước
+        return Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
+    }
+
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
-    @Override public boolean isCredentialsNonExpired() { return true; }
     @Override public boolean isEnabled() { return true; }
 }
