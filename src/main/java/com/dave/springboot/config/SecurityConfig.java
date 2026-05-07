@@ -37,23 +37,31 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authManager (AuthenticationConfiguration authConfig) throws Exception {
+    public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
     @Autowired
     private JwtFilter jwtFilter;
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http.csrf(customizer -> customizer.disable())
+//                .authorizeHttpRequests(request -> request
+//                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+//                        .anyRequest().authenticated())
+//                // Xóa bỏ httpBasic() nếu đã dùng JWT
+//                .sessionManagement(session ->
+//                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .build();
+//    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
-                        .anyRequest().authenticated())
-                // Xóa bỏ httpBasic() nếu đã dùng JWT
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        return http
+                .authorizeHttpRequests(request -> request.anyRequest().authenticated()) // Vẫn khóa mọi cánh cửa
+                .oauth2Login(Customizer.withDefaults()) // BÙA CHÚ QUAN TRỌNG NHẤT: BẬT MÀN HÌNH LOGIN OAUTH2
                 .build();
     }
 
